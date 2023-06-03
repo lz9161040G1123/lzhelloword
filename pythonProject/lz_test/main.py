@@ -1,8 +1,6 @@
 import tornado.ioloop
 import tornado.web
-from lz_test import application
-
-
+from pythonProject.lz_test import application
 if __name__ == '__main__':
     app = application.map_app()
     http_server = tornado.httpserver.HTTPServer(app)

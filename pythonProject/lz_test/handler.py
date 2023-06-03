@@ -3,7 +3,7 @@ import json
 import tornado.web
 import configparser
 import os
-from DB_test.DB_operate import dbconf
+from pythonProject.DB_test.DB_operate import dbconf
 class MainMnadeler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def post(self):
@@ -26,6 +26,7 @@ class MainMnadeler(tornado.web.RequestHandler):
             'orderid': orderid,
             'data': res
         }
+
         self.write(data)
 
     def get(self):
