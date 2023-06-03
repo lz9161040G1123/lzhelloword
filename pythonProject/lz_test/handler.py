@@ -9,7 +9,6 @@ class MainMnadeler(tornado.web.RequestHandler):
     def post(self):
         argus = self.request.arguments
         print(argus)
-        data = {}
         cur_path = os.path.abspath(os.curdir)
         cf = configparser.ConfigParser()
         cur_path = cur_path + "/data.conf"
@@ -30,13 +29,22 @@ class MainMnadeler(tornado.web.RequestHandler):
         self.write(data)
 
     def get(self):
+        argus = self.request.arguments
+        print(argus)
+        cur_path = os.path.abspath(os.curdir)
+        cf = configparser.ConfigParser()
+        cur_path = cur_path + "/data.conf"
+        cf.read(cur_path)
+        sql1 = "INSERT INTO `trade` (`ID`, `order_id`) VALUES (3, '3456789')"
+        sec = "lzdata"
+        res = dbconf(cf, sql1, sec)
+        sql2 = "select *from trade"
+        res = dbconf(cf, sql2, sec)
+
         orderid = self.get_argument("order_id")
         print(orderid)
         data = {
-            'code': 0,
-            'orderid': orderid
+            'orderid': orderid,
+            'data': res
         }
-
-
-
         self.write(data)
