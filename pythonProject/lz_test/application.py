@@ -1,6 +1,7 @@
 import tornado.ioloop
 import tornado.web
-from handler import *
+
+from pythonProject.lz_test.handler import MainMnadeler
 
 
 def map_app():
