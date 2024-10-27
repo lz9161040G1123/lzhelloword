@@ -10,6 +10,7 @@ def map_app():
             (r"/apply", MainMnadeler),
             (r"/api/login", test1),
             (r"/api/today-orders", test2),
+            (r"/api/history-orders", test2),
             (r"/api/data", test3),
 
         ]

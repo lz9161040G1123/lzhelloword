@@ -88,10 +88,6 @@ class test1(tornado.web.RequestHandler):
         self.write(data)
 
 
-
-
-
-
 class test2(tornado.web.RequestHandler):
 
     def set_default_headers(self):
