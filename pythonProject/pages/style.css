@@ -1,0 +1,104 @@
+.content {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+
+
+table {
+            width: 100%; /* 表格宽度设为100% */
+            border-collapse: collapse; /* 合并单元格边框 */
+        }
+
+        th, td {
+            border: 1px solid black; /* 为表头和单元格添加1像素黑色边框 */
+            padding: 8px; /* 添加内边距以增加可读性 */
+            text-align: left; /* 文本左对齐 */
+        }
+
+        th {
+            background-color: #f2f2f2; /* 为表头添加背景色 */
+        }
+
+
+#todayOrders2 {  
+            margin-bottom: 100px; /* 根据需要调整这个值 */  
+        } 
+
+#todayOrders {  
+            margin-bottom: 100px; /* 根据需要调整这个值 */  
+        } 
+#historyOrdersResult {  
+            margin-bottom: 100px; /* 根据需要调整这个值 */  
+        } 
+
+
+#result {
+            margin-top: 20px;
+        }
+        #todayOrders {
+            margin-top: 20px;
+        }
+        #todayOrders2 {
+            margin-top: 20px;
+        }
+
+/* 基本样式 */  
+#tabs {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ddd;
+    padding: 0;
+    padding-bottom: 10px; /* 添加内边距底部以实现上移效果 */
+
+    z-index: 10;
+}
+
+  
+.tab-button {  
+    flex: 1; /* 让所有按钮等宽分配空间 */  
+    padding: 10px 20px; /* 添加内边距使按钮更大 */  
+    text-align: center; /* 可选，使文本居中 */  
+    cursor: pointer; /* 鼠标悬停时显示为手形 */  
+    border: none; /* 移除默认边框 */  
+    background-color: #f0f0f0; /* 背景色 */  
+    transition: background-color 0.3s; /* 背景色过渡效果 */  
+}  
+  
+.tab-button.active {  
+    background-color: green; /* 选中状态的背景色 */  
+    /* 可选：添加其他选中状态的样式，如字体加粗、颜色变化等 */  
+}  
+  
+.content-container {  
+    display: none; /* 默认隐藏所有内容容器 */  
+    border: none
+    /*padding: 0 px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; */
+}  
+  
+.content-container.active {  
+    display: block; /* 显示当前选中的内容容器 */  
+}  
+  
+/* 小屏幕样式 */  
+@media (max-width: 600px) {  
+    .tab-button {  
+/*        padding: 10px; /* 减小内边距以适应小屏幕 */  
+        margin: 0 2px; /* 可选，减小字体大小 */  
+    }
+    .content-container {  
+    padding: 0 px; /* 内容容器的内边距 */  
+    border: none
+
+} 
+  
+    /* 如果需要，可以为特定tab添加额外样式 */  
+    /* .order-tab { ... } */  
+    /* 但请注意，在您的HTML中并没有使用.order-tab类，所以这里不需要它 */  
+}

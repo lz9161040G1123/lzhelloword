@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css"> 
+    <script src="script.js"></script>
+</head>
+<body>
+    <form id="loginForm" onsubmit="return login()">
+        用户名：<input type="text" id="username"><br>
+        密码：<input type="password" id="password"><br>
+        <input type="submit" value="登录">
+    </form>
+
+    <div id="tabs" style="display: none;">  
+    <button id="orderTab" class="tab-button">下单</button>
+    <button id="myTab" class="tab-button ">我的</button>  
+
+</div>  
+
+<style>
+    .button-container {
+        margin-top: 100px;
+    }
+</style>
+<div id="content">  
+    <div id="myContent" class="content-container">  
+        <form id="historyOrdersForm" onsubmit="return fetchMyHistoryOrders()">  
+        <label for="startDate">开始日期：</label>  
+        <input type="date" id="startDate" name="startDate" required><br>  
+        <label for="endDate">结束日期：</label>  
+        <input type="date" id="endDate" name="endDate" required><br>  
+        <input type="submit" value="查询历史订单">  
+    </form>  
+    <div id="historyOrdersResult"></div> <!-- 显示历史订单查询结果 -->  
+    </div>  
+    <div id="orderContent" class="content-container">  
+        <form onsubmit="return order()">
+        菜名：<input type="text" id="dish"><span>(请输入你想要的菜名)</span><br>
+        数量：<input type="text" id="quantity"><span>(请输入你想要的数量)</span><br>
+        <input type="submit" value="下单">
+    </form>
+    <p id="result"></p>
+    <div class="button-container">
+        <button onclick="getTodayOrders()">今日下单</button> <!-- 点击按钮调用"今日下单"接口 -->
+    </div>
+    <div id="todayOrders"></div> <!-- 显示今日下单页面 -->
+    </div>  
+</div>
+
+
+</body>
+</html>
