@@ -241,3 +241,43 @@ class test3(tornado.web.RequestHandler):
         data = json.dumps(data)
 
         self.write(data)
+
+
+class test5(tornado.web.RequestHandler):
+
+    def set_default_headers(self):
+        # 设置CORS头
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+
+    @tornado.gen.coroutine
+    def post(self):
+        self.options()
+
+    def get(self):
+        self.options()
+
+    def options(self):
+        dishes = []
+        # 10个不重复生成菜品列表
+        namelist = ["芹菜", "西红柿", "土豆", "胡萝卜", "茄子", "鱼", "黄瓜", "青椒", "豆腐", "豆芽"]
+        # 10个对应菜品的英文
+        namelist_en = ["celery", "tomato", "potato", "carrot", "eggplant", "fish", "cucumber",
+                       "green_pepper", "bean_curd", "bean_sprouts"]
+        nuitlist = ["斤", "个", "把", "袋", "斤", "袋", "斤", "斤", "斤", "斤"]
+        for i in range(10):
+            dish = {
+                'id': namelist_en[i],
+                'name': namelist[i],
+                'unit': nuitlist[i],
+            }
+            dishes.append(dish)
+        data = {
+            'msg': 'success',
+            'dishes': dishes
+        }
+        data = json.dumps(data, ensure_ascii=False)
+
+        self.write(data)
+        pass
