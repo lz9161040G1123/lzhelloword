@@ -7,11 +7,25 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <form id="loginForm" onsubmit="return login()">
-        用户名：<input type="text" id="username"><br>
-        密码：<input type="password" id="password"><br>
-        <input type="submit" value="登录">
-    </form>
+    <div id="loginPage" class="login-page">
+    <div class="login-container">
+        <h2>李思春蔬菜经营部</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="button-container"> <!-- 新增的按钮容器 -->
+                <button type="button" onclick="handleRegister()">注册</button>
+                <button type="button" onclick="handleLogin()">登录</button>
+            </div>
+        </form>
+    </div>
+    </div>
 
     <div id="tabs" style="display: none;">  
     <button id="orderTab" class="tab-button">下单</button>
@@ -34,19 +48,16 @@
         <input type="submit" value="查询历史订单">  
     </form>  
     <div id="historyOrdersResult"></div> <!-- 显示历史订单查询结果 -->  
-    </div>  
-    <div id="orderContent" class="content-container">  
-        <form onsubmit="return order()">
-        菜名：<input type="text" id="dish"><span>(请输入你想要的菜名)</span><br>
-        数量：<input type="text" id="quantity"><span>(请输入你想要的数量)</span><br>
-        <input type="submit" value="下单">
-    </form>
+    </div>
+    <div id="orderContent" class="content-container">
+        <div id="orderForm"></div>
+       <button onclick="submitOrder()">下单</button> <!-- 点击按钮调用"下单"接口 -->
     <p id="result"></p>
     <div class="button-container">
         <button onclick="getTodayOrders()">今日下单</button> <!-- 点击按钮调用"今日下单"接口 -->
     </div>
     <div id="todayOrders"></div> <!-- 显示今日下单页面 -->
-    </div>  
+    </div>
 </div>
 
 

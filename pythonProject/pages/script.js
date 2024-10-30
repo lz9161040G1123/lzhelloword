@@ -1,4 +1,4 @@
-function login() {
+function handleLogin() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
@@ -22,7 +22,7 @@ function login() {
         .then(data => {
         // 假设后端返回的数据中有一个 `success` 字段表示登录是否成功
         if (data.status === 'success') {
-            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("loginPage").style.display = "none";
             document.getElementById("tabs").style.display = "flex";
             uid = data.uid; // 保存用户 ID
             sessionStorage.setItem('userUid', uid);
@@ -38,7 +38,8 @@ function login() {
             myTab.classList.remove('active');  
             orderTab.classList.add('active'); // 给订单tab添加active类 
             myContent.classList.remove('active');
-            orderContent.classList.add('active'); 
+            orderContent.classList.add('active');
+            getTodayOrders(); // 调用"今日下单"接口获取最新数据
 
 
             // changeTab('order'); // 登录成功后默认显示“下单”页面
@@ -275,5 +276,44 @@ function fetchMyHistoryOrders(event) {
     .catch((error) => {
         console.error('Error fetching orders:', error);
         alert('获取订单时发生错误，请稍后再试。');
+    });
+}
+
+window.onload = function() {
+    fetchAndGenerateInputs();
+};
+
+function fetchAndGenerateInputs() {
+    fetch('http://139.196.202.40:8800/api/dishes')
+        .then(response => response.json())
+        .then(data => {
+            let form = document.getElementById('orderForm');
+            data = data.dishes;
+            data.forEach(dish => {
+                form.innerHTML += `
+                    ${dish.name}：<input type="text" id="${dish.id}"><span>(${dish.unit})</span><br>
+                `;
+            });
+        });
+}
+
+// 提交订单
+function submitOrder() {
+    getTodayOrders();
+    let order = [];
+    let inputs = document.getElementById('orderForm').getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+        order.push({
+            name: inputs[i].id,
+            quantity: inputs[i].value,
+            unit: '斤' // 单位暂时固定为斤
+        });
+    }
+    fetch('api/submitOrder', { // 假设这个API用来提交订单
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
     });
 }
