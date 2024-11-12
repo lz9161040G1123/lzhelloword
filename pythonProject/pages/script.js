@@ -8,7 +8,7 @@ function handleLogin() {
             formData.append('password', password);
 
     // 使用 Fetch API 发送 POST 请求
-            fetch('http://139.196.202.40:8800/api/login', {
+            fetch('https://lzstudy.top/api/login', {
              method: 'POST',
              body: formData,
             })
@@ -112,7 +112,7 @@ function fetchMyHistoryOrders(event) {
     const formData = new FormData(document.getElementById('historyOrdersForm'));  
   
     // 发送POST请求到服务器  
-    fetch('http://139.196.202.40:8800/api/history-orders', { // 注意：这里应该是'history-orders'而不是'today-orders'  
+    fetch('https://lzstudy.top/api/history-orders', { // 注意：这里应该是'history-orders'而不是'today-orders'
         method: 'POST',  
         body: formData,  
     })  
@@ -195,7 +195,7 @@ function fetchMyHistoryOrders(event) {
             formData.append('quantity', quantity);
             formData.append('uid', uid);
 
-            fetch('http://139.196.202.40:8800/api/data', {
+            fetch('https://lzstudy.top/api/data', {
                 method: 'POST',
                 body: formData,
             })
@@ -228,7 +228,7 @@ function fetchMyHistoryOrders(event) {
                 window.location.href = "index.html";
             }
          formData.append('uid', uid);
-         fetch('http://139.196.202.40:8800/api/today-orders', { // 注意：这里假设URL是'history-orders'而不是'today-orders'
+         fetch('https://lzstudy.top/api/today-orders', { // 注意：这里假设URL是'history-orders'而不是'today-orders'
         method: 'POST',
         body: formData,
     })
@@ -284,7 +284,7 @@ window.onload = function() {
 };
 
 function fetchAndGenerateInputs() {
-    fetch('http://139.196.202.40:8800/api/dishes')
+    fetch('https://lzstudy.top/api/dishes')
         .then(response => response.json())
         .then(data => {
             let form = document.getElementById('orderForm');
@@ -309,11 +309,26 @@ function submitOrder() {
             unit: '斤' // 单位暂时固定为斤
         });
     }
-    fetch('api/submitOrder', { // 假设这个API用来提交订单
+    let data = new FormData();
+    data.append('orderList', JSON.stringify(order));
+    fetch('https://lzstudy.top/api/data', { // 假设这个API用来提交订单
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(order)
+        body: data
+    }).then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Network response was not ok.');
+        }
+    })
+    .then(data => {
+        if (data.msg === 'success') {
+            alert('下单成功');
+        }
+        // 显示返回结果在页面上
+        document.getElementById('orderresult').innerText = data.msg;
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
 }
